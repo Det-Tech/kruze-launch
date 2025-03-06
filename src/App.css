@@ -25,3 +25,19 @@
 .exo-2 {
   font-family: 'Exo 2', sans-serif;
 }
+
+.wkit-button {
+  background-color: white !important;
+  color: black !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+.wkit-connected-button {
+  color: black !important;
+  padding: 9px !important;
+}
+
+.wkit-disconnect-button__container {
+  left: 0px;
+}

@@ -58,7 +58,7 @@ const PreSale = () => {
                             <span className="exo-2 font-normal text-[20px] leading-[24px] max-sm:text-[15px] max-sm:leading-[20px]">Balnace</span>
                         </div>
                         <div className="flex flex-row justify-between w-full">
-                            <p className="exo-2 font-normal text-[20px] leading-[24px] max-sm:text-[15px] max-sm:leading-[20px]">1 SUI = 370 $VTMT</p>
+                            <p className="exo-2 font-normal text-[20px] leading-[24px] max-sm:text-[15px] max-sm:leading-[20px]">25 SUI = 55,555 $VTMT</p>
                             <h2 className="exo-2 font-extrabold text-[24px] leading-[28.8px] max-sm:text-[20px] max-sm:leading-[24px]">0 SUI</h2>
                         </div>
                         <div className="flex flex-row justify-between w-full gap-[32px] max-sm:flex-col max-sm:gap-[15px]">
@@ -90,7 +90,7 @@ const PreSale = () => {
                             Min Purchase
                         </p>
                         <h2 className="exo-2 font-extrabold text-[20px] leading-[24px] mt-[10px]">
-                            10 SUI
+                            2,250 SUI
                         </h2>
                     </div>
                     <div className="flex flex-col px-[17px] pt-[8px] pb-[22px] w-full rounded-2xl items-start bg-[#047DA9]">

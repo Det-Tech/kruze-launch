@@ -2,6 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useLocation } from 'react-router-dom';
+import {
+    ConnectModal,
+    ConnectButton,
+    useAccountBalance,
+    useWallet,
+    SuiChainId,
+    ErrorCode,
+    formatSUI,
+    useSuiClient,
+    AccountAssetManager,
+    AccountCoinManager
+  } from "@suiet/wallet-kit";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -35,9 +47,23 @@ const Header = () => {
                 >
                     Buy Now
                 </button>
-                <button className="bg-green-400 cursor-pointer max-lg:w-[130px] max-lg:text-[18px] hover:bg-green-500 text-black text-navy-900 rounded-2xl hidden xl:block h-[64px] max-h-[64px] w-[200px] max-w-[200px] font-semibold text-[20px] leading-[24.2px] tracking-normal text-center">
+                {/* <button className="bg-green-400 cursor-pointer max-lg:w-[130px] max-lg:text-[18px] hover:bg-green-500 text-black text-navy-900 rounded-2xl hidden xl:block h-[64px] max-h-[64px] w-[200px] max-w-[200px] font-semibold text-[20px] leading-[24.2px] tracking-normal text-center">
                     Connect Wallet
-                </button>
+                </button> */}
+                <ConnectButton
+                            className='wkit-button bg-green-400 cursor-pointer  max-lg:text-[18px] hover:bg-green-500 text-black text-navy-900 rounded-2xl hidden xl:block h-[64px] max-h-[64px] font-semibold text-[20px] leading-[24.2px] tracking-normal text-center'
+                            onConnectError={(error) => {
+                                if (error.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
+                                    console.warn(
+                                        "user rejected the connection to " + error.details?.wallet
+                                    );
+                                } else {
+                                    console.warn("unknown connect error: ", error);
+                                }
+                            }}
+                        >
+                            Connect Wallet
+                        </ConnectButton>
                 <button
                     className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     onClick={() => { setShowBtn() }}
@@ -63,9 +89,25 @@ const Header = () => {
                         <li className="w-full">
                             <a href="/market-place" className={`block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white ${location.pathname === '/market-place' ? 'bg-blue-700' : ''}`}>Marketplace</a>
                         </li>
-                        <button className="bg-green-400 mt-[10px] justify-center items-center cursor-pointer hover:bg-green-500 text-white rounded-[5px] block h-[30px] max-h-[30px] w-[200px] max-w-[200px] text-[16px]">
+
+                        <ConnectButton
+                            className='w-full bg-green-400 mt-[10px] justify-center items-center cursor-pointer hover:bg-green-500 text-white rounded-[5px] block h-[30px] max-h-[30px] text-[16px]'
+                            onConnectError={(error) => {
+                                if (error.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
+                                    console.warn(
+                                        "user rejected the connection to " + error.details?.wallet
+                                    );
+                                } else {
+                                    console.warn("unknown connect error: ", error);
+                                }
+                            }}
+                        >
                             Connect Wallet
-                        </button>
+                        </ConnectButton>
+
+                        {/* <button className="bg-green-400 mt-[10px] justify-center items-center cursor-pointer hover:bg-green-500 text-white rounded-[5px] block h-[30px] max-h-[30px] w-[200px] max-w-[200px] text-[16px]">
+                            Connect Wallet
+                        </button> */}
                     </ul>
                 </div>
             </div>
