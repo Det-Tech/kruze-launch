@@ -13,15 +13,18 @@ import {
 } from "lucide-react";
 import { useSuiClient, useWallet } from '@suiet/wallet-kit';
 import { toast } from "react-hot-toast";
-import { admin_deposit, admin_update_launchpad, admin_update_price, admin_withdraw, admin_update_claim_status, claim, buy, newLaunch } from "./lib/web3";
-import { firstTargetSupply, launchpadCoinType, totalSaleSupply, treasuryObjectId } from "./config";
+import {   admin_withdraw, create_pool, admin_mint, add_liquidity, swap_sui_for_isg, swap_isg_for_sui } from "./lib/web3";
+import { firstTargetSupply, launchpadCoinType, launchpadPackageId, totalSaleSupply, treasuryObjectId } from "./config";
 import axios from "axios";
 
 function App() {
   const wallet = useWallet();
   const client = useSuiClient();
-  const [vitalAmount, setVitalAmount] = useState(2000_000_000_000);
-  const [suiPrice, setSuiPrice] = useState(3200);
+  const [mintAmount, setMintAmount] = useState(1_000_000_00);
+  const [suiAmount, setSuiAmount] = useState(500_000_000);
+  const [isgAmount, setIsgAmount] = useState(1_000_000);
+  const [swapIsgAmount, setSwapIsgAmount] = useState(1_000_00);
+  const [swapSuiAmount, setSwapSuiAmount] = useState(1_000_000);
   const [balance, setBalance] = useState<any>(0);
   const [liveTime, setLiveTime] = useState<any>();
   const [coinType, setCoinType] = useState<any>(launchpadCoinType);
@@ -65,117 +68,115 @@ function App() {
     return `${hours}:${minutes}:${secs}`;
   };
 
-  const newLaunchHandle = async () => {
+  const createPoolHandle = async () => {
     try{
       if(!wallet?.account?.address){
         return toast.error("Wallet Connect");
       }
 
-      const tt = toast.loading("Launching ...");
+      const tt = toast.loading("create pool ...");
 
-      if(await newLaunch(wallet, client)){
-        toast.success("new launched successfully", { id: tt });
+      if(await create_pool(wallet, client)){
+        toast.success("created pool successfully", { id: tt });
       }else{
-        toast.error("launched Error", { id: tt });
+        toast.error("create pool Error", { id: tt });
       }
     }catch(err){
       console.log(err)
     }
   }
 
-  const adminDepositHandle = async () => {
+  const withdrawPoolHandle = async () => {
     try{
       if(!wallet?.account?.address){
         return toast.error("Wallet Connect");
       }
 
-      const tt = toast.loading("Depositing...");
-      
-      if(await admin_deposit(wallet, client, 2000_000_000_000)){
-        toast.success("Deposited successfully", { id: tt });
+      const tt = toast.loading("Withdrawing ...");
+
+      if(await admin_withdraw(wallet, client)){
+        toast.success("withdraw successfully", { id: tt });
       }else{
-        toast.error("Deposit Error", { id: tt });
+        toast.error("withdraw Error", { id: tt });
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const adminMintHandle = async () => {
+    try{
+      if(!wallet?.account?.address){
+        return toast.error("Wallet Connect");
+      }
+
+      const tt = toast.loading("Minting...");
+      
+      if(await admin_mint(wallet, client, 2000_000_000_000, wallet?.account?.address)){
+        toast.success("Minted successfully", { id: tt });
+      }else{
+        toast.error("Mint Error", { id: tt });
       }
     }catch(err){
       console.log(err) 
     }
   }
 
-  const adminWithdrawHandle = async () => {
+  const addLiquidityHandle = async () => {
     try{
       if(!wallet?.account?.address){
         return toast.error("Wallet Connect");
       }
 
-      const tt = toast.loading("Withdrawing...");
+      const tt = toast.loading("Add liquiditing...");
       
-      if(await admin_withdraw(wallet, client)){
-        toast.success("Withdraw successfully", { id: tt });
+      if(await add_liquidity(wallet, client)){
+        toast.success("Add Liquidity successfully", { id: tt });
       }else{
-        toast.error("Withdraw Error", { id: tt });
+        toast.error("Add Liqudity Error", { id: tt });
       }
     }catch(err){
       console.log(err)
     }
   }
 
-  const adminUpdateLaunchpadHandle = async () => {
+  const suiForIsgHandle = async () => {
     try{
       if(!wallet?.account?.address){
         return toast.error("Wallet Connect");
       }
 
-      const tt = toast.loading("Update launchpad...");
+      const tt = toast.loading("Swapping...");
       
-      if(await admin_update_launchpad(wallet, client, true)){
-        toast.success("Update launchpad successfully", { id: tt });
+      if(await swap_sui_for_isg(wallet, client)){
+        toast.success("Swapped successfully", { id: tt });
       }else{
-        toast.error("Update launchpad Error", { id: tt });
+        toast.error("Swap Error", { id: tt });
       }
     }catch(err){
       console.log(err)
     }
   }
 
-  const adminUpdatePriceHandle = async () => {
+  const isgForSuiHandle = async () => {
     try{
       if(!wallet?.account?.address){
         return toast.error("Wallet Connect");
       }
 
-      if(suiPrice <= 0){
-        return toast.error("Input the exact sui price");
-      }
-
-      const tt = toast.loading("Update launchpad price...");
+      const tt = toast.loading("Swapping...");
       
-      if(await admin_update_price(wallet, client, suiPrice)){
-        toast.success("Update launchpad price successfully", { id: tt });
+      if(await swap_isg_for_sui(wallet, client)){
+        toast.success("Swapped successfully", { id: tt });
       }else{
-        toast.error("Update launchpad price Error", { id: tt });
+        toast.error("Swap Error", { id: tt });
       }
     }catch(err){
       console.log(err)
     }
   }
 
-  const adminUpdateClaimStatusHandle = async (status: boolean) => {
-    try{
-      if(!wallet?.account?.address){
-        return toast.error("Wallet Connect");
-      }
-
-      const tt = toast.loading("Update launchpad ClaimStatus...");
-      
-      if(await admin_update_claim_status(wallet, client, status)){
-        toast.success("Update launchpad ClaimStatus successfully", { id: tt });
-      }else{
-        toast.error("Update launchpad ClaimStatus Error", { id: tt });
-      }
-    }catch(err){
-      console.log(err)
-    }
-  }
+ 
 
 
   useEffect(() => {
@@ -222,21 +223,15 @@ function App() {
             cursor,
         });
         objects.data.map((item: any) => {
-            if(item.data?.type?.includes("0x3::staking")){
-                // coins.push(item.data);
-            } else if(!item.data?.type?.includes("0x2::coin")){
-                // nft.push(item.data);
-            }
-            else {
                 coins.push(item.data);
-            }
         })
         cursor = objects.nextCursor;
         if(!objects.hasNextPage){
             break;
         }
     }
-    const filtered = coins.filter((item : any)=>item.type.includes(launchpadCoinType))
+    console.log(coins)
+    const filtered = coins.filter((item : any)=>item.type.includes(launchpadPackageId))
     console.log("coins ", filtered)
   }
 
@@ -246,77 +241,93 @@ function App() {
       <div className="bg-green-900/30 md:p-6 p-4 rounded-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="space-y-1">
-                <div className="text-lg font-semibold text-text-primary">
-                  Admin Setting
+                <div className="text-lg font-semibold text-white">
+                  Fair launch
                 </div>
               </div>
               <div className="text-right">
                 <div className="text-sm text-white">Balance</div>
-                <div className="font-semibold text-text-primary">{balance} SUI</div>
+                <div className="font-semibold text-white">{balance} SUI</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                  <label className="text-white"> coin type</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Coin Type"
-                    value={coinType}
-                    onChange={(e: any)=>coinType(e.target.value)}
-                    className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
-                  />
-              </div>
-              <button onClick={newLaunchHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                New Launch(admin)
+              <button onClick={createPoolHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Create pool
+              </button>
+              <button onClick={withdrawPoolHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Withdraw pool(admin)
               </button>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <div className="flex-1">
-                <label className="text-white"> deposit amount</label>
+                <label className="text-white"> mint amount</label>
                 <input
                   type="number"
-                  placeholder="Enter SUI price"
-                  value={vitalAmount}
-                  onChange={(e: any)=>setVitalAmount(e.target.value)}
+                  placeholder="Enter mint amount"
+                  value={mintAmount}
+                  onChange={(e: any)=>setMintAmount(e.target.value)}
                   className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
                 />
               </div>
-              <button onClick={adminDepositHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Deposit vital(admin)
+              <button onClick={adminMintHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Mint
               </button>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <div className="flex-1">
-                <label className="text-white"> sui price 3.2$ = 3200</label>
+                <label className="text-white"> SUI amount</label>
                 <input
                   type="number"
-                  placeholder="Enter SUI price"
-                  value={suiPrice}
-                  onChange={(e: any)=>setSuiPrice(e.target.value)}
+                  placeholder="Enter SUI amount"
+                  value={suiAmount}
+                  onChange={(e: any)=>setSuiAmount(e.target.value)}
+                  className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
+                />
+                <label className="text-white"> ISG amount</label>
+                <input
+                  type="number"
+                  placeholder="Enter ISG amount"
+                  value={isgAmount}
+                  onChange={(e: any)=>setIsgAmount(e.target.value)}
                   className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
                 />
               </div>
-              <button onClick={adminUpdatePriceHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Update Price(admin)
+              <button onClick={addLiquidityHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Add liquidity
+              </button>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+              <div className="flex-1">
+                <label className="text-white"> sui {"->"} isg </label>
+                <input
+                  type="number"
+                  placeholder="Enter SUI Amount"
+                  value={swapSuiAmount}
+                  onChange={(e: any)=>setSwapSuiAmount(e.target.value)}
+                  className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
+                />
+              </div>
+              <button onClick={suiForIsgHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Swap(swap_sui_for_isg)
               </button>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <button onClick={adminWithdrawHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Withdraw-SUI-Vital(admin)
-              </button>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <button onClick={()=>adminUpdateClaimStatusHandle(true)} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Claim Status(enable)
-              </button>
-              <button onClick={()=>adminUpdateClaimStatusHandle(false)} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Claim Status(disable)
+              <div className="flex-1">
+                <label className="text-white"> isg {"->"} sui</label>
+                <input
+                  type="number"
+                  placeholder="Enter Isg Amount"
+                  value={swapIsgAmount}
+                  onChange={(e: any)=>setSwapIsgAmount(e.target.value)}
+                  className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
+                />
+              </div>
+              <button onClick={isgForSuiHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                Swap(swap_isg_for_sui)
               </button>
             </div>
       </div>
-       
     </div>
   );
 }
