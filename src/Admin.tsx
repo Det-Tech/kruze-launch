@@ -16,12 +16,11 @@ import { toast } from "react-hot-toast";
 import { admin_deposit, admin_update_launchpad, admin_update_price, admin_withdraw, admin_update_claim_status, claim, buy, newLaunch } from "./lib/web3";
 import { firstTargetSupply, launchpadCoinType, totalSaleSupply, treasuryObjectId } from "./config";
 import axios from "axios";
-import moment from "moment";
 
 function App() {
   const wallet = useWallet();
   const client = useSuiClient();
-  const [vramAmount, setVramAmount] = useState(2000_000_000_000);
+  const [vitalAmount, setVitalAmount] = useState(2000_000_000_000);
   const [suiPrice, setSuiPrice] = useState(3200);
   const [balance, setBalance] = useState<any>(0);
   const [liveTime, setLiveTime] = useState<any>();
@@ -30,7 +29,7 @@ function App() {
   
 
   const [treasuryObject, setTreasuryObject] = useState<any>();
-  const totalSupply = 500_000_000; // 500M VRAM
+  const totalSupply = 500_000_000; // 500M VTMT
   const price = 0.0025; // Current price
   const futurePrice = 0.003; // Future price
   const fdv = totalSupply * futurePrice;
@@ -38,8 +37,8 @@ function App() {
   useEffect(() => {
     axios.get("https://timeapi.io/api/time/current/zone?timeZone=Europe%2FAmsterdam")
     .then(data=>{
-      const dateA = new Date('2025-02-20T12:00:00'); // Example future date
-      const dateB = new Date(data.data?.dateTime); // Example past date
+      const dateA: any = new Date('2025-02-20T12:00:00'); // Example future date
+      const dateB: any = new Date(data.data?.dateTime); // Example past date
 
       // Calculate the initial difference in seconds
       const initialDifference = Math.floor((dateA - dateB) / 1000); // Difference in seconds
@@ -188,11 +187,11 @@ function App() {
         }
       }).then((data: any) => {
         console.log("treauryObject ", data);
-        const vramTreasury = Number(data?.data?.content?.fields?.vramTreasury)
+        const vitalTreasury = Number(data?.data?.content?.fields?.vitalTreasury)
         console.log("participants len ", data?.data?.content?.fields.balanceOf?.fields?.contents.length)
-        console.log("progress ", Number(data?.data?.content?.fields?.totalSoldVram) / totalSaleSupply)
+        console.log("progress ", Number(data?.data?.content?.fields?.totalSoldVital) / totalSaleSupply)
         const decimal = 1_000_000;
-        setProgress(((Number(data?.data?.content?.fields?.totalSoldVram) / totalSaleSupply) / decimal * 100).toFixed(6))
+        setProgress(((Number(data?.data?.content?.fields?.totalSoldVital) / totalSaleSupply) / decimal * 100).toFixed(6))
         setTreasuryObject(data) 
       })     
     }
@@ -277,13 +276,13 @@ function App() {
                 <input
                   type="number"
                   placeholder="Enter SUI price"
-                  value={vramAmount}
-                  onChange={(e: any)=>setVramAmount(e.target.value)}
+                  value={vitalAmount}
+                  onChange={(e: any)=>setVitalAmount(e.target.value)}
                   className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
                 />
               </div>
               <button onClick={adminDepositHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Deposit vram(admin)
+                Deposit vital(admin)
               </button>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -304,7 +303,7 @@ function App() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <button onClick={adminWithdrawHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Withdraw-SUI-Vram(admin)
+                Withdraw-SUI-Vital(admin)
               </button>
             </div>
             

@@ -28,7 +28,7 @@ const Header = () => {
     }, [location])
 
     return (
-        <nav className={`relative py-4 md:px-8 lg:px-16 flex items-center justify-between h-[120px] w-full max-md:px-[20px] transition-all ${location.pathname === '/pre-sale' ? 'bg-[#05122de3]' : ''}`}>
+        <nav className={`relative py-4 md:px-8 lg:px-16 flex items-center justify-between h-[120px] w-full max-md:px-[20px] transition-all ${location.pathname === '/presale' ? 'bg-[#05122de3]' : ''}`}>
             <div className="flex items-center">
                 <img src={logo} alt="logo" className='w-[286px] h-[57px] max-md:w-[200px] max-md:h-fit max-sm:w-[180px] transition-all' />
             </div>
@@ -43,7 +43,7 @@ const Header = () => {
             <div className="flex space-x-3 items-center relative">
                 <button
                     className="bg-yellow-400 cursor-pointer max-lg:w-[130px] max-lg:text-[18px] hover:bg-yellow-500 text-black underline rounded-2xl h-[64px] max-h-[64px] max-md:h-[50px] max-md:w-[120px] w-[200px] max-w-[200px] font-semibold text-[20px] max-sm:h-[45px] max-sm:w-[110px] max-md:text-[18px] leading-[24.2px] tracking-normal text-center transition-all"
-                    onClick={() => navigate("/pre-sale")}
+                    onClick={() => navigate("/presale")}
                 >
                     Buy Now
                 </button>

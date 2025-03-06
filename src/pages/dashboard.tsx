@@ -53,7 +53,7 @@ const LandingPage = () => {
 					</h1>
 					<button
 						className=" bg-[#FFE100] w-[300px] h-[64px] rounded-2xl mt-[10px] flex justify-center items-center text-black exo-2 leading-[29.05px] !font-bold text-[24px] underline cursor-pointer text-center"
-						onClick={() => navigate("/pre-sale")}
+						onClick={() => navigate("/presale")}
 					>
 						<span className="!font-black">Buy Vitalment</span>
 					</button>

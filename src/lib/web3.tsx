@@ -384,6 +384,7 @@ export const newLaunch  = async (wallet: any, client: any) => {
             },
           }
         );
+        console.log(resData)
         return true;
     }catch(err: any) {
         return false

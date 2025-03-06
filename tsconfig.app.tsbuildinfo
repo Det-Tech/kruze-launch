@@ -1,0 +1,1 @@
+{"root":["./src/admin.tsx","./src/app.tsx","./src/config.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/lib/web3.tsx","./src/pages/dashboard.tsx","./src/pages/presale.tsx","./src/pages/header/index.tsx"],"errors":true,"version":"5.7.3"}

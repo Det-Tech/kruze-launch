@@ -1,8 +1,8 @@
-export const launchpadPackageId = "0xaf4dca086c427bc71b93bfd64531e080d164e8a2311419445336ab203853f66b";
-export const launchpadCoinType = "0x785082b640fb4de6fa0804c3fbf80297c49c875d825db7cd56cd65b03902b48a::tram_token::TRAM_TOKEN";
+export const launchpadPackageId = "0xe8c3fc5c1259024183ad35af43f4713fee9873ecae294ae6e7275868b16c0b4e";
+export const launchpadCoinType = "0x2b3d2f96ecc8bd303798aa47182b0df95ab22c327cbe195165deff04f33add68::vtmt::VTMT";
 
-export const treasuryInitialVersion = 372343620;
-export const treasuryObjectId = "0x991592a5c41582823862e36d2fed0f1cd0ea3f88234fb3d24bad207ed13c4e5a";
+export const treasuryInitialVersion = 394230058;
+export const treasuryObjectId = "0x855bf33b4f337d2c68f0b398cf55bffb351d4a95130528f483348745c617b57b";
 
 export const firstTargetSupply =  12_000_000_000;
 export const secondTargetSupply = 40_000_000_000;
