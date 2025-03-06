@@ -121,7 +121,7 @@ const LandingPage = () => {
 							<img
 								src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
 								alt="YouTube Video Thumbnail"
-								className="w-full h-auto"
+								className="w-full h-full absolute top-0 right-0 z-10"
 							/>
 
 							{/* Play Button */}
@@ -129,7 +129,7 @@ const LandingPage = () => {
 								className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-60 transition"
 								onClick={() => window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")}
 							>
-								<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer" />
+								<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer z-20" />
 							</button>
 						</div>
 					</div>
@@ -156,7 +156,7 @@ const LandingPage = () => {
 								<img
 									src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
 									alt="YouTube Video Thumbnail"
-									className="w-full h-auto"
+									className="w-full h-full absolute top-0 right-0 z-10"
 								/>
 
 								{/* Play Button */}
@@ -164,7 +164,7 @@ const LandingPage = () => {
 									className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-60 transition"
 									onClick={() => window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")}
 								>
-									<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer" />
+									<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer z-20" />
 								</button>
 							</div>
 						</div>
@@ -175,7 +175,7 @@ const LandingPage = () => {
 								<img
 									src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
 									alt="YouTube Video Thumbnail"
-									className="w-full h-auto"
+									className="w-full h-full absolute top-0 right-0 z-10"
 								/>
 
 								{/* Play Button */}
@@ -183,7 +183,7 @@ const LandingPage = () => {
 									className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-60 transition"
 									onClick={() => window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank")}
 								>
-									<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer" />
+									<img src={play} alt="play" width={70} className=" rounded-xl cursor-pointer z-20" />
 								</button>
 							</div>
 						</div>
