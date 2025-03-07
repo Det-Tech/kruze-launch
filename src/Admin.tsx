@@ -250,7 +250,7 @@ function App() {
                 <div className="font-semibold text-white">{balance} SUI</div>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4 justify-between">
               <button onClick={createPoolHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
                 Create pool
               </button>
@@ -258,9 +258,9 @@ function App() {
                 Withdraw pool(admin)
               </button>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4 text-left">
               <div className="flex-1">
-                <label className="text-white"> mint amount</label>
+                <label className="text-amber-300"> mint amount</label>
                 <input
                   type="number"
                   placeholder="Enter mint amount"
@@ -270,12 +270,12 @@ function App() {
                 />
               </div>
               <button onClick={adminMintHandle} className="w-full sm:w-auto bg-accent-green hover:bg-accent-green-light text-black px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
-                Mint
+                Mint(admin)
               </button>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4 text-left">
               <div className="flex-1">
-                <label className="text-white"> SUI amount</label>
+                <label className="text-amber-300"> SUI amount</label>
                 <input
                   type="number"
                   placeholder="Enter SUI amount"
@@ -283,7 +283,7 @@ function App() {
                   onChange={(e: any)=>setSuiAmount(e.target.value)}
                   className="w-full bg-green-900/20 border border-green-800/20 rounded-lg px-4 py-3 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-green-500/30"
                 />
-                <label className="text-white"> ISG amount</label>
+                <label className="text-amber-300"> ISG amount</label>
                 <input
                   type="number"
                   placeholder="Enter ISG amount"
@@ -296,9 +296,9 @@ function App() {
                 Add liquidity
               </button>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4 text-left">
               <div className="flex-1">
-                <label className="text-white"> sui {"->"} isg </label>
+                <label className="text-amber-300"> sui {"->"} isg </label>
                 <input
                   type="number"
                   placeholder="Enter SUI Amount"
@@ -312,9 +312,9 @@ function App() {
               </button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4 text-left">
               <div className="flex-1">
-                <label className="text-white"> isg {"->"} sui</label>
+                <label className="text-amber-300"> isg {"->"} sui</label>
                 <input
                   type="number"
                   placeholder="Enter Isg Amount"
