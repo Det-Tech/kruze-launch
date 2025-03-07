@@ -135,6 +135,15 @@ export const add_liquidity  = async (wallet: any, client: any ) => {    // isg t
     const filtered = coins.filter((item : any)=>item.type.includes(launchpadPackageId))
     const selectedCoin = filtered[0];
 
+    if(filtered.length > 1) {
+      tx.mergeCoins(
+        filtered[0].objectId,
+        filtered.slice(1).map((item:any, index: any) => {
+            return item.objectId
+        })
+      )
+    }
+
       const isg_splitted = tx.splitCoins(selectedCoin.objectId, [
         1 * Number(1_000_000), //1_000_000,
       ]);
@@ -257,6 +266,14 @@ export const swap_isg_for_sui  = async (wallet: any, client: any ) => {    // is
       const filtered = coins.filter((item : any)=>item.type.includes(launchpadPackageId))
       const selectedCoin = filtered[0];
 
+      if(filtered.length > 1) {
+        tx.mergeCoins(
+          filtered[0].objectId,
+          filtered.slice(1).map((item:any, index: any) => {
+              return item.objectId
+          })
+        )
+      }
 
       const isg_splitted = tx.splitCoins(selectedCoin.objectId, [
         1 * Number(1_000_00), //111_000_000_000,
