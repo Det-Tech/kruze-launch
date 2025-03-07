@@ -28,10 +28,10 @@ const Header = () => {
     }, [location])
 
     return (
-        <nav className={`justify-center relative py-4 md:px-8 lg:px-16 flex items-center justify-between h-[120px] w-full max-md:px-[20px] transition-all ${location.pathname === '/presale' ? 'bg-[#05122de3]' : ''}`}>
+        <nav className={`justify-center relative py-4 md:px-8 lg:px-16 flex items-center justify-between h-[120px] w-full max-md:px-[20px] transition-all`}>
 
                 <ConnectButton
-                            className='wkit-button bg-green-400 cursor-pointer  max-lg:text-[18px] hover:bg-green-500 text-black text-navy-900 rounded-2xl hidden xl:block h-[64px] max-h-[64px] font-semibold text-[20px] leading-[24.2px] tracking-normal text-center'
+                            className='wkit-button bg-green-400 cursor-pointer  max-lg:text-[18px] hover:bg-green-500 text-black text-navy-900 rounded-2xl xl:block h-[64px] max-h-[64px] font-semibold text-[20px] leading-[24.2px] tracking-normal text-center'
                             onConnectError={(error) => {
                                 if (error.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
                                     console.warn(
